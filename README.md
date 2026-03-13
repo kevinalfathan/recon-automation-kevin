@@ -1,23 +1,24 @@
 # Recon Automation Script
-Recon Automation Script adalah script Bash sederhana untuk mengotomatisasi proses reconnaissance awal dalam web security testing.
-Script ini melakukan enumerasi subdomain, mendeteksi host yang aktif, dan melakukan crawling endpoint secara otomatis menggunakan beberapa tools populer di dunia offensive security.
 
-Pipeline recon yang digunakan:
+Recon Automation Script adalah script Bash sederhana yang digunakan untuk mengotomatisasi proses **reconnaissance awal dalam web security testing**. Script ini membantu melakukan beberapa tahap penting dalam proses recon secara otomatis, mulai dari enumerasi subdomain, mendeteksi host yang aktif, hingga melakukan crawling endpoint dari target.
+
+Pipeline yang digunakan dalam script ini:
+
 domain → subdomain enumeration → live host detection → endpoint discovery
 
-Script ini juga dilengkapi dengan logging, error handling, dan deduplikasi hasil, sehingga cocok digunakan sebagai dasar automation dalam workflow reconnaissance.
+Script ini juga dilengkapi dengan **logging, error handling, dan deduplikasi hasil**, sehingga proses recon dapat berjalan lebih stabil dan terstruktur.
 
 ---
 
-# Tools yang Digunakan
+## Tools yang Digunakan
 
-Script ini menggunakan beberapa tools dari ekosistem security reconnaissance.
+Script ini memanfaatkan beberapa tools populer dalam ekosistem **web reconnaissance dan offensive security**.
 
 ### subfinder
 
-Digunakan untuk melakukan subdomain enumeration secara pasif dari berbagai sumber OSINT.
+Digunakan untuk melakukan **subdomain enumeration secara pasif** dari berbagai sumber OSINT.
 
-Output:
+Contoh output:
 
 ```
 sub.example.com
@@ -29,24 +30,22 @@ dev.example.com
 
 ### anew
 
-Digunakan untuk deduplikasi data secara realtime.
+Digunakan untuk melakukan **deduplikasi data secara realtime**.
 Jika data yang sama muncul kembali, `anew` tidak akan menambahkannya ke file output.
 
-Contoh:
+Contoh penggunaan:
 
 ```
 subfinder | anew all-subdomains.txt
 ```
 
-Jika subdomain sudah ada, maka tidak akan ditambahkan lagi.
-
 ---
 
 ### httpx
 
-Digunakan untuk mendeteksi host yang aktif dari daftar subdomain.
+Digunakan untuk **mendeteksi host yang aktif** dari daftar subdomain.
 
-Tool ini juga menampilkan informasi tambahan seperti:
+Tool ini juga memberikan informasi tambahan seperti:
 
 * HTTP status code
 * Page title
@@ -62,9 +61,9 @@ https://example.com [200] [Example Domain] [93.184.216.34]
 
 ### katana
 
-Digunakan untuk melakukan crawling endpoint dari host yang aktif.
+Digunakan untuk melakukan **crawling endpoint dari host yang aktif**.
 
-Tool ini akan mencari berbagai path seperti:
+Tool ini dapat menemukan berbagai path seperti:
 
 ```
 /login
@@ -75,7 +74,7 @@ Tool ini akan mencari berbagai path seperti:
 
 ---
 
-# Workflow Recon Script
+## Workflow Recon Script
 
 Script bekerja dengan pipeline berikut:
 
@@ -104,18 +103,18 @@ all-subdomains.txt
 endpoints.txt
 ```
 
-Penjelasan singkat:
+Penjelasan alur kerja:
 
 1. Script membaca daftar domain dari `input/domains.txt`
-2. `subfinder` mencari semua subdomain
-3. `anew` memastikan tidak ada duplikasi
-4. `httpx` mengecek host yang aktif
-5. `katana` melakukan crawling endpoint
-6. Script menampilkan total hasil di akhir eksekusi
+2. `subfinder` mencari seluruh subdomain dari domain target
+3. `anew` memastikan tidak ada subdomain yang duplikat
+4. `httpx` mengecek subdomain mana yang aktif
+5. `katana` melakukan crawling endpoint dari host yang aktif
+6. Script menampilkan ringkasan hasil di akhir eksekusi
 
 ---
 
-# Struktur Repository
+## Struktur Repository
 
 ```
 recon-automation-kevin
@@ -135,24 +134,56 @@ recon-automation-kevin
 ├── scripts
 │   └── recon-auto.sh
 │
+├── screenshots
+│   ├── run-script.png
+│   ├── live-hosts.png
+│   └── endpoints.png
+│
 └── README.md
 ```
 
 ---
 
-# Setup Environment
+## Clone Repository
 
-Script ini dirancang untuk dijalankan pada sistem berbasis Linux seperti:
+Clone repository ini ke mesin lokal:
+
+```
+git clone https://github.com/USERNAME/recon-automation-kevin.git
+```
+
+Masuk ke direktori project:
+
+```
+cd recon-automation-kevin
+```
+
+---
+
+## Setup Environment
+
+Script ini dirancang untuk dijalankan pada sistem berbasis **Linux**, seperti:
 
 * Kali Linux
 * Ubuntu
 * Debian
 
-Pastikan `Go` sudah terinstall karena sebagian tools menggunakan Go.
+Pastikan **Go** sudah terinstall karena beberapa tools menggunakan Go.
 
 ---
 
-# Install Tools
+## Requirements
+
+Sebelum menjalankan script, pastikan sistem memiliki:
+
+* Linux environment
+* Go
+* Git
+* Internet connection
+
+---
+
+## Install Tools
 
 ### Install subfinder
 
@@ -192,15 +223,17 @@ export PATH=$PATH:~/go/bin
 
 ---
 
-# Cara Menjalankan Script
+## Cara Menjalankan Script
 
-Pertama buat script menjadi executable:
+Pastikan repository sudah di-clone dan semua tools telah terinstall.
+
+Berikan permission eksekusi pada script:
 
 ```
 chmod +x scripts/recon-auto.sh
 ```
 
-Kemudian jalankan script:
+Jalankan script:
 
 ```
 ./scripts/recon-auto.sh
@@ -208,15 +241,15 @@ Kemudian jalankan script:
 
 Script akan otomatis:
 
-* membaca domain
-* melakukan enumeration
-* mengecek host aktif
+* membaca domain dari file input
+* melakukan subdomain enumeration
+* mendeteksi host yang aktif
 * melakukan crawling endpoint
 * menyimpan hasil ke folder output
 
 ---
 
-# Contoh Input
+## Contoh Input
 
 File `input/domains.txt`
 
@@ -224,7 +257,7 @@ File `input/domains.txt`
 picoctf.org
 ```
 
-Script dapat menerima beberapa domain sekaligus, misalnya:
+Script juga dapat menerima beberapa domain sekaligus:
 
 ```
 hackerone.com
@@ -234,7 +267,7 @@ tryhackme.com
 
 ---
 
-# Contoh Output
+## Contoh Output
 
 ### Live Hosts
 
@@ -271,13 +304,13 @@ https://www.picoctf.org/get_started.html
 
 ---
 
-# Penjelasan Script
+## Penjelasan Script
 
 Berikut penjelasan bagian utama dari script `recon-auto.sh`.
 
 ---
 
-## 1. Error Handling dan Base Directory
+### 1. Error Handling dan Base Directory
 
 ```
 set -Eeuo pipefail
@@ -285,7 +318,7 @@ set -Eeuo pipefail
 BASE_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 ```
 
-Bagian ini berfungsi untuk meningkatkan stabilitas script.
+Bagian ini meningkatkan stabilitas script.
 
 `set -Eeuo pipefail` memastikan script akan berhenti jika terjadi error agar proses tidak berjalan dalam kondisi tidak valid.
 
@@ -293,7 +326,7 @@ Bagian ini berfungsi untuk meningkatkan stabilitas script.
 
 ---
 
-## 2. Variabel Direktori
+### 2. Variabel Direktori
 
 ```
 INPUT="$BASE_DIR/input"
@@ -303,13 +336,13 @@ LOGS="$BASE_DIR/logs"
 mkdir -p "$INPUT" "$OUTPUT" "$LOGS"
 ```
 
-Bagian ini mendefinisikan lokasi folder utama yang digunakan script.
+Bagian ini mendefinisikan direktori utama yang digunakan oleh script.
 
-Jika folder belum ada, maka `mkdir -p` akan membuatnya secara otomatis.
+Jika direktori belum ada, maka `mkdir -p` akan membuatnya secara otomatis.
 
 ---
 
-## 3. Error Logging
+### 3. Error Logging
 
 ```
 exec 2>> "$LOGS/errors.log"
@@ -325,7 +358,7 @@ Hal ini memudahkan proses debugging tanpa mengganggu output utama di terminal.
 
 ---
 
-## 4. Subdomain Enumeration
+### 4. Subdomain Enumeration
 
 ```
 subfinder -d "$domain" -silent | anew "$OUTPUT/all-subdomains.txt"
@@ -333,11 +366,11 @@ subfinder -d "$domain" -silent | anew "$OUTPUT/all-subdomains.txt"
 
 Script menggunakan `subfinder` untuk mencari subdomain dari domain target.
 
-Output kemudian diproses oleh `anew` untuk memastikan hanya subdomain unik yang disimpan.
+Output kemudian diproses oleh `anew` untuk memastikan hanya **subdomain unik** yang disimpan.
 
 ---
 
-## 5. Live Host Detection
+### 5. Live Host Detection
 
 ```
 httpx -l "$OUTPUT/all-subdomains.txt" -silent -status-code -title -ip
@@ -348,7 +381,7 @@ httpx -l "$OUTPUT/all-subdomains.txt" -silent -status-code -title -ip
 Tool ini juga menampilkan informasi tambahan seperti:
 
 * HTTP status code
-* page title
+* Page title
 * IP address
 
 Hasilnya disimpan di:
@@ -359,7 +392,7 @@ output/live.txt
 
 ---
 
-## 6. Endpoint Crawling
+### 6. Endpoint Crawling
 
 ```
 katana -silent -depth 3
@@ -383,7 +416,7 @@ output/endpoints.txt
 
 ---
 
-## 7. Statistik Hasil
+### 7. Statistik Hasil
 
 ```
 total_sub=$(wc -l < "$OUTPUT/all-subdomains.txt")
@@ -402,10 +435,13 @@ Di akhir eksekusi script akan menampilkan ringkasan hasil:
 ## Screenshots
 
 ### Menjalankan Script
+
 ![Run Script](run-script.png)
 
 ### Live Hosts
+
 ![Live Hosts](live-hosts.png)
 
 ### Endpoints
+
 ![Endpoints](endpoints.png)
