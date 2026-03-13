@@ -149,7 +149,7 @@ recon-automation-kevin
 Clone repository ini ke mesin lokal:
 
 ```
-git clone https://github.com/USERNAME/recon-automation-kevin.git
+git clone https://github.com/kevinalfathan/recon-automation-kevin.git
 ```
 
 Masuk ke direktori project:
@@ -445,4 +445,5 @@ Di akhir eksekusi script akan menampilkan ringkasan hasil:
 ### Endpoints
 
 ![Endpoints](endpoints.png)
+
 
