@@ -25,14 +25,14 @@ while IFS= read -r domain; do
 
 	echo "[$(date)] Proses target: $domain" | tee -a "$LOGS/progress.log"
 	echo "[$(date)] Mencari subdomain $domain..." | tee -a "$LOGS/progress.log"
-	subfinder -d "$domain" -silent | anew "$INPUT/all-subdomains.txt" > /dev/null
+	subfinder -d "$domain" -silent | anew "$OUTPUT/all-subdomains.txt" > /dev/null
 
 done < "$INPUT/domains.txt"
-sort -u "$INPUT/all-subdomains.txt" -o "$INPUT/all-subdomains.txt"
+sort -u "$OUTPUT/all-subdomains.txt" -o "$OUTPUT/all-subdomains.txt"
 
 # Mencari host yang aktif dari semua subdomain menggunakan httpx
 echo "[$(date)] Mencari host aktif..." | tee -a "$LOGS/progress.log"
-	httpx -l "$INPUT/all-subdomains.txt" -silent -status-code -title -ip \
+	httpx -l "$OUTPUT/all-subdomains.txt" -silent -status-code -title -ip \
 		| anew "$OUTPUT/live.txt" > /dev/null
 	sort -u "$OUTPUT/live.txt" -o "$OUTPUT/live.txt"
 
@@ -44,7 +44,7 @@ echo "[$(date)] Mencari endpoint..." | tee -a "$LOGS/progress.log"
 	sort -u "$OUTPUT/endpoints.txt" -o "$OUTPUT/endpoints.txt"
 echo "=====================================================" | tee -a "$LOGS/progress.log"
 
-total_sub=$(wc -l < "$INPUT/all-subdomains.txt")
+total_sub=$(wc -l < "$OUTPUT/all-subdomains.txt")
 total_live=$(wc -l < "$OUTPUT/live.txt")
 total_errors=$(wc -l < "$LOGS/errors.log")
 
