@@ -122,22 +122,22 @@ recon-automation-kevin
 ├── input
 │   └── domains.txt
 │
+├── logs
+│   ├── progress.log
+│   └── errors.log
+│
 ├── output
 │   ├── all-subdomains.txt
 │   ├── live.txt
 │   └── endpoints.txt
 │
-├── logs
-│   ├── progress.log
-│   └── errors.log
-│
-├── scripts
-│   └── recon-auto.sh
-│
 ├── screenshots
 │   ├── run-script.png
 │   ├── live-hosts.png
 │   └── endpoints.png
+│
+├── scripts
+│   └── recon-auto.sh
 │
 └── README.md
 ```
@@ -445,3 +445,4 @@ Di akhir eksekusi script akan menampilkan ringkasan hasil:
 ### Endpoints
 
 ![Endpoints](endpoints.png)
+
