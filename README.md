@@ -160,11 +160,46 @@ cd recon-automation-kevin
 
 ## Install Tools
 
-Pastikan **Go** sudah terinstall karena beberapa tools menggunakan Go dan folder Go binary ada di PATH:
+Beberapa tools dalam project ini membutuhkan **Go** untuk proses instalasi.
+Pastikan Go sudah terinstall sebelum menginstall tools lainnya.
+
+### Install Go
+
+Download Go dari website resmi:
 
 ```
-export PATH=$PATH:~/go/bin
+https://go.dev/dl/
 ```
+
+### Install Go (Linux)
+
+Install menggunakan terminal:
+
+```
+wget https://go.dev/dl/go1.22.5.linux-amd64.tar.gz
+sudo rm -rf /usr/local/go
+sudo tar -C /usr/local -xzf go1.22.5.linux-amd64.tar.gz
+```
+
+Tambahkan Go ke PATH:
+
+```
+echo 'export PATH=$PATH:/usr/local/go/bin:$HOME/go/bin' >> ~/.profile
+source ~/.profile
+```
+
+Verifikasi instalasi:
+
+```
+go version
+```
+
+Jika berhasil, outputnya akan terlihat seperti:
+
+```
+go version go1.22.5 linux/amd64
+```
+
 ### Install subfinder
 
 ```
@@ -415,6 +450,7 @@ Di akhir eksekusi script akan menampilkan ringkasan hasil:
 ### Endpoints
 
 ![Endpoints](screenshots/endpoints.png)
+
 
 
 
