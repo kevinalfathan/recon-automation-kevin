@@ -399,7 +399,13 @@ Di akhir eksekusi script akan menampilkan ringkasan hasil:
 
 ---
 
-# Screenshot
+## Screenshots
 
+### Menjalankan Script
+![Run Script](run-script.png)
 
----
+### Live Hosts
+![Live Hosts](live-hosts.png)
+
+### Endpoints
+![Endpoints](endpoints.png)
