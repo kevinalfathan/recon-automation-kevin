@@ -144,7 +144,7 @@ recon-automation-kevin
 
 ---
 
-## Clone Repository
+## Setup Environment
 
 Clone repository ini ke mesin lokal:
 
@@ -158,40 +158,18 @@ Masuk ke direktori project:
 cd recon-automation-kevin
 ```
 
----
-
-## Setup Environment
-
-Script ini dirancang untuk dijalankan pada sistem berbasis **Linux**, seperti:
-
-* Kali Linux
-* Ubuntu
-* Debian
-
-Pastikan **Go** sudah terinstall karena beberapa tools menggunakan Go.
-
----
-
-## Requirements
-
-Sebelum menjalankan script, pastikan sistem memiliki:
-
-* Linux environment
-* Go
-* Git
-* Internet connection
-
----
-
 ## Install Tools
 
+Pastikan **Go** sudah terinstall karena beberapa tools menggunakan Go dan folder Go binary ada di PATH:
+
+```
+export PATH=$PATH:~/go/bin
+```
 ### Install subfinder
 
 ```
 go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 ```
-
----
 
 ### Install httpx
 
@@ -199,15 +177,11 @@ go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 ```
 
----
-
 ### Install katana
 
 ```
 go install github.com/projectdiscovery/katana/cmd/katana@latest
 ```
-
----
 
 ### Install anew
 
@@ -215,11 +189,7 @@ go install github.com/projectdiscovery/katana/cmd/katana@latest
 go install github.com/tomnomnom/anew@latest
 ```
 
-Pastikan folder Go binary ada di PATH:
 
-```
-export PATH=$PATH:~/go/bin
-```
 
 ---
 
@@ -436,14 +406,15 @@ Di akhir eksekusi script akan menampilkan ringkasan hasil:
 
 ### Menjalankan Script
 
-![Run Script](run-script.png)
+![Run Script](screenshots/run-script.png)
 
 ### Live Hosts
 
-![Live Hosts](live-hosts.png)
+![Live Hosts](screenshots/live-hosts.png)
 
 ### Endpoints
 
-![Endpoints](endpoints.png)
+![Endpoints](screenshots/endpoints.png)
+
 
 
