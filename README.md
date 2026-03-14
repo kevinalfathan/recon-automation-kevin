@@ -165,14 +165,6 @@ Pastikan Go sudah terinstall sebelum menginstall tools lainnya.
 
 ### Install Go
 
-Download Go dari website resmi:
-
-```
-https://go.dev/dl/
-```
-
-### Install Go (Linux)
-
 Install menggunakan terminal:
 
 ```
